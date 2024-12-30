@@ -1,4 +1,4 @@
-name: All Users
+name: 📲 App Users
 source: snowflake-bumble
 type: raw_sql
 rawSql: |
