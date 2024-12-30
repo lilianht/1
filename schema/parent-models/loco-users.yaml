@@ -1,4 +1,4 @@
-name: Loco Users
+name: All Users
 source: snowflake-bumble
 type: raw_sql
 rawSql: select * from public.users
