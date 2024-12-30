@@ -2,20 +2,23 @@
 # Changes made here will be ignored. Please use the Hightouch dashboard to create and edit sources and destinations.
 
 sources:
+  e-commerce:
+    name: 🍏 eCommerce
+    type: snowflake
   Databricks-4d3bf:
     name: Databricks
     type: databricks
   snowflake-bumble:
-    name: Snowflake [Bumble]
+    name: 📲 App Users
     type: snowflake
   snowflake:
     name: Snowflake
     type: snowflake
   b2-b-accounts:
-    name: B2B [Accounts]
+    name: 💼 B2B
     type: snowflake
   Snowflake-75068:
-    name: B2C [Healthcare]
+    name: 🏥 Healthcare
     type: snowflake
   BigQuery-2b08f:
     name: BigQuery
