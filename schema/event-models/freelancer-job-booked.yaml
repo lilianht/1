@@ -1,4 +1,4 @@
-name: Freelancer job booked
+name: Job booked
 source: marketplace
 type: raw_sql
 rawSql: |
