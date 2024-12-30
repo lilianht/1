@@ -15,10 +15,10 @@ sources:
     name: 📲 App Users
     type: snowflake
   snowflake:
-    name: Snowflake
+    name: 💼 B2B
     type: snowflake
   b2-b-accounts:
-    name: 💼 Moneris
+    name: '💵 Moneris '
     type: snowflake
   Snowflake-75068:
     name: 🏥 Healthcare
