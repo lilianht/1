@@ -15,7 +15,7 @@ sources:
     name: Snowflake
     type: snowflake
   b2-b-accounts:
-    name: 💼 B2B
+    name: 💼 Moneris
     type: snowflake
   Snowflake-75068:
     name: 🏥 Healthcare
