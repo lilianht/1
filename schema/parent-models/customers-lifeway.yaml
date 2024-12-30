@@ -1,6 +1,6 @@
-name: Customers (Lodge)
+name: Customers
 source: snowflake
-description: All of Lodge's B2C customer list.
+description: All of your B2C customer list.
 type: raw_sql
 rawSql: |
   SELECT
