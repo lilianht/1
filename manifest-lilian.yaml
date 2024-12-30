@@ -2,6 +2,9 @@
 # Changes made here will be ignored. Please use the Hightouch dashboard to create and edit sources and destinations.
 
 sources:
+  marketplace:
+    name: 🛒 Marketplace
+    type: snowflake
   e-commerce:
     name: 🍏 eCommerce
     type: snowflake
