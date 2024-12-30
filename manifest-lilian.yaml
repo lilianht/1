@@ -2,6 +2,9 @@
 # Changes made here will be ignored. Please use the Hightouch dashboard to create and edit sources and destinations.
 
 sources:
+  Databricks-4d3bf:
+    name: Databricks
+    type: databricks
   snowflake-bumble:
     name: Snowflake [Bumble]
     type: snowflake
@@ -17,9 +20,6 @@ sources:
   BigQuery-2b08f:
     name: BigQuery
     type: bigquery
-  Databricks-4d3bf:
-    name: Databricks
-    type: databricks
 destinations:
   http-request-50c0f-757dc:
     type: webhookV2
