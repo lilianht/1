@@ -1,0 +1,22 @@
+name: Connect social account
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    EVENT_ID,
+    CAMPAIGN,
+    SOURCE,
+    USER_ID,
+    BOOLEAN_34,
+    BOOLEAN_52,
+    BOOLEAN_87,
+    NUMBER_10,
+    NUMBER_100,
+    NUMBER_1000,
+    NUMBER_30,
+    NUMBER_365,
+    NUMBER_7,
+    DATEADD(DAY, - NUMBER_365, CURRENT_TIMESTAMP()) AS event_date
+  FROM
+    PUBLIC.EVENTS;
+eventTimestampColumn: EVENT_DATE
