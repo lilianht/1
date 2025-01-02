@@ -1,0 +1,4 @@
+name: User attributes
+source: marketplace
+type: raw_sql
+rawSql: select * from public.users
