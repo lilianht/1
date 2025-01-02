@@ -1,0 +1,62 @@
+name: Saved searches
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    USER_ID,
+    DATEADD(DAY, -NUMBER_7, CURRENT_TIMESTAMP()) AS TIMESTAMP,
+    USER_ID AS SEARCH_ID,
+    -- Assign category based on NUMBER_10
+    CASE
+      WHEN NUMBER_10 IN (0, 1) THEN 'Buy & Sell'
+      WHEN NUMBER_10 IN (2, 3) THEN 'Cars & Vehicles'
+      WHEN NUMBER_10 = 4 THEN 'Real Estate'
+      WHEN NUMBER_10 = 5 THEN 'Jobs'
+      WHEN NUMBER_10 = 6 THEN 'Services'
+      WHEN NUMBER_10 = 7 THEN 'Pets'
+      WHEN NUMBER_10 = 8 THEN 'Community'
+      WHEN NUMBER_10 = 9 THEN 'Vacation Rentals'
+      ELSE 'Other'
+    END AS Category,
+    -- JSON object for parameters
+    OBJECT_CONSTRUCT(
+      'price', 25 + (NUMBER_100 % 276), -- Ensures price is between 25 and 300
+      'location', CASE
+                    WHEN NUMBER_10 % 10 = 0 THEN 'Ontario'
+                    WHEN NUMBER_10 % 10 = 1 THEN 'Quebec'
+                    WHEN NUMBER_10 % 10 = 2 THEN 'British Columbia'
+                    WHEN NUMBER_10 % 10 = 3 THEN 'Alberta'
+                    WHEN NUMBER_10 % 10 = 4 THEN 'Manitoba'
+                    WHEN NUMBER_10 % 10 = 5 THEN 'Saskatchewan'
+                    WHEN NUMBER_10 % 10 = 6 THEN 'Nova Scotia'
+                    WHEN NUMBER_10 % 10 = 7 THEN 'New Brunswick'
+                    WHEN NUMBER_10 % 10 = 8 THEN 'Prince Edward Island'
+                    WHEN NUMBER_10 % 10 = 9 THEN 'Newfoundland and Labrador'
+                    ELSE 'Ontario'
+                  END,
+      'breed', CASE
+                 WHEN NUMBER_10 % 8 = 0 THEN 'Labrador Retriever'
+                 WHEN NUMBER_10 % 8 = 1 THEN 'German Shepherd'
+                 WHEN NUMBER_10 % 8 = 2 THEN 'Golden Retriever'
+                 WHEN NUMBER_10 % 8 = 3 THEN 'Bulldog'
+                 WHEN NUMBER_10 % 8 = 4 THEN 'Poodle'
+                 WHEN NUMBER_10 % 8 = 5 THEN 'Beagle'
+                 WHEN NUMBER_10 % 8 = 6 THEN 'Goldendoodle'
+                 WHEN NUMBER_10 % 8 = 7 THEN 'Goldendoodle'
+               END,
+      'offer type', CASE
+                      WHEN BOOLEAN_52 THEN 'wanted'
+                      ELSE 'offering'
+                    END,
+      'payment', CASE
+                   WHEN BOOLEAN_34 THEN 'cashless'
+                   ELSE 'cash accepted'
+                 END
+    ) AS parameters,
+    -- Enabled/Disabled based on BOOLEAN_87
+    CASE
+      WHEN BOOLEAN_87 THEN 'enabled'
+      ELSE 'disabled'
+    END AS status
+  FROM
+    PUBLIC.EVENTS;
