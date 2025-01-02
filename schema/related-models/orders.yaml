@@ -1,0 +1,37 @@
+name: Orders
+source: marketplace
+type: raw_sql
+rawSql: >
+  WITH user_pool AS (
+    SELECT 
+      USER_ID,
+      NUMBER_30,
+      NUMBER_10,
+      NUMBER_100
+    FROM PUBLIC.USERS
+  ),
+
+  shifted_users AS (
+    SELECT 
+      USER_ID,
+      NUMBER_30,
+      NUMBER_10,
+      NUMBER_100,
+      LEAD(USER_ID) OVER (ORDER BY USER_ID) AS shifted_user_id -- Select the next user as buyer
+    FROM user_pool
+  )
+
+  SELECT
+    shifted_users.shifted_user_id AS user_id, -- User ID as buyer
+    shifted_users.USER_ID AS seller_id,      -- Seller ID
+    -- Generate a random order date within the last 90 days based on NUMBER_30
+    DATEADD(DAY, -shifted_users.NUMBER_30, CURRENT_DATE) AS order_date,
+    -- Generate a unique order ID based on USER_ID and NUMBER_10
+    CONCAT('ORD-', shifted_users.USER_ID, '-', shifted_users.NUMBER_10) AS order_id,
+    -- Generate an order value between 19.95 and 599.99 using NUMBER_100
+    19.95 + (shifted_users.NUMBER_100 % 581) AS order_value, -- Random value between 19.95 and 599.99
+    shifted_users.USER_ID AS ad_listing_id -- Alias for seller_id
+  FROM
+    shifted_users
+  WHERE shifted_users.shifted_user_id IS NOT NULL -- Exclude rows where there is
+  no next user
