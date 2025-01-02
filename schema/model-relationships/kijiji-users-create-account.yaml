@@ -1,0 +1,11 @@
+from:
+  relationshipName: Create account
+  slug: kijiji-users
+  mergeColumns: false
+to:
+  slug: create-account
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: USER_ID
+    toColumn: USER_ID
