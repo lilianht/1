@@ -1,0 +1,11 @@
+from:
+  relationshipName: Active Searches & Ads per User
+  slug: kijiji-users
+  mergeColumns: true
+to:
+  slug: active-searches-and-ads-per-user
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: USER_ID
+    toColumn: USER_ID

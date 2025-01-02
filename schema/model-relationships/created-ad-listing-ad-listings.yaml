@@ -1,0 +1,11 @@
+from:
+  relationshipName: Ad listings
+  slug: created-ad-listing
+  mergeColumns: true
+to:
+  slug: ad-listings
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: AD_ID
+    toColumn: AD_ID
