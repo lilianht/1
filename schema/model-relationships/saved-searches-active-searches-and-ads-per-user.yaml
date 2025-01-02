@@ -1,0 +1,11 @@
+from:
+  relationshipName: Active Searches & Ads per User
+  slug: saved-searches
+  mergeColumns: true
+to:
+  slug: active-searches-and-ads-per-user
+  mergeColumns: false
+cardinality: many:1
+mapping:
+  - fromColumn: SEARCH_ID
+    toColumn: USER_ID
