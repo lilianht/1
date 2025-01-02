@@ -3,8 +3,9 @@ from:
   slug: saved-new-search
   mergeColumns: true
 to:
+  relationshipName: Saved new search
   slug: saved-searches
-  mergeColumns: false
+  mergeColumns: true
 cardinality: '1:1'
 mapping:
   - fromColumn: SEARCH_ID

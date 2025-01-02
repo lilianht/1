@@ -1,0 +1,11 @@
+from:
+  relationshipName: Updated search filters
+  slug: saved-searches
+  mergeColumns: false
+to:
+  slug: updated-search-filters
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: SEARCH_ID
+    toColumn: SEARCH_ID
