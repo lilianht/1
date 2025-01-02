@@ -1,0 +1,11 @@
+from:
+  relationshipName: Saved searches
+  slug: saved-new-search
+  mergeColumns: true
+to:
+  slug: saved-searches
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: SEARCH_ID
+    toColumn: SEARCH_ID
