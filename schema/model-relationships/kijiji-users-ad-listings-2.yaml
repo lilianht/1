@@ -3,8 +3,9 @@ from:
   slug: kijiji-users
   mergeColumns: false
 to:
+  relationshipName: Kijiji Users
   slug: ad-listings-2
-  mergeColumns: false
+  mergeColumns: true
 cardinality: 1:many
 mapping:
   - fromColumn: USER_ID
