@@ -1,0 +1,80 @@
+name: Ad listings
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    USER_ID,
+    DATEADD(DAY, -NUMBER_7, CURRENT_TIMESTAMP()) AS POSTED_AT,
+    USER_ID AS AD_ID,
+    -- Assign category based on NUMBER_10
+    CASE
+      WHEN NUMBER_10 IN (0, 1, 7, 8) THEN 'Pets' -- Pets replaces Buy & Sell and Community
+      WHEN NUMBER_10 IN (2, 3) THEN 'Cars & Vehicles'
+      WHEN NUMBER_10 = 4 THEN 'Real Estate'
+      WHEN NUMBER_10 = 5 THEN 'Jobs'
+      WHEN NUMBER_10 = 6 THEN 'Services'
+      WHEN NUMBER_10 = 9 THEN 'Vacation Rentals'
+      ELSE 'Other'
+    END AS Category,
+    -- JSON object for parameters
+    OBJECT_CONSTRUCT(
+      'price', 19.95 + (NUMBER_100 % 36), -- Random value between 19.95 and 54.95
+      'location', CASE
+                    WHEN NUMBER_10 % 10 = 0 THEN 'Ontario'
+                    WHEN NUMBER_10 % 10 = 1 THEN 'Quebec'
+                    WHEN NUMBER_10 % 10 = 2 THEN 'British Columbia'
+                    WHEN NUMBER_10 % 10 = 3 THEN 'Alberta'
+                    WHEN NUMBER_10 % 10 = 4 THEN 'Manitoba'
+                    WHEN NUMBER_10 % 10 = 5 THEN 'Saskatchewan'
+                    WHEN NUMBER_10 % 10 = 6 THEN 'Nova Scotia'
+                    WHEN NUMBER_10 % 10 = 7 THEN 'New Brunswick'
+                    WHEN NUMBER_10 % 10 = 8 THEN 'Prince Edward Island'
+                    WHEN NUMBER_10 % 10 = 9 THEN 'Newfoundland and Labrador'
+                    ELSE 'Ontario'
+                  END,
+      'breed', CASE
+                 WHEN NUMBER_10 IN (0, 1, 7, 8) THEN CASE
+                   WHEN NUMBER_10 % 8 = 0 THEN 'Labrador Retriever'
+                   WHEN NUMBER_10 % 8 = 1 THEN 'German Shepherd'
+                   WHEN NUMBER_10 % 8 = 2 THEN 'Golden Retriever'
+                   WHEN NUMBER_10 % 8 = 3 THEN 'Bulldog'
+                   WHEN NUMBER_10 % 8 = 4 THEN 'Poodle'
+                   WHEN NUMBER_10 % 8 = 5 THEN 'Beagle'
+                   WHEN NUMBER_10 % 8 = 6 THEN 'Goldendoodle'
+                   WHEN NUMBER_10 % 8 = 7 THEN 'Dachshund'
+                 END
+                 ELSE NULL
+               END,
+      'offer type', CASE
+                      WHEN BOOLEAN_52 THEN 'wanted'
+                      ELSE 'offering'
+                    END,
+      'payment', CASE
+                   WHEN BOOLEAN_34 THEN 'cashless'
+                   ELSE 'cash accepted'
+                 END,
+      'title', CASE
+                 WHEN NUMBER_10 IN (0, 1, 7, 8) THEN 'Adopt your next furry friend!'
+                 WHEN NUMBER_10 IN (2, 3) THEN 'Find your dream car today!'
+                 WHEN NUMBER_10 = 4 THEN 'Explore prime real estate opportunities'
+                 WHEN NUMBER_10 = 5 THEN 'Job postings - hiring now!'
+                 WHEN NUMBER_10 = 6 THEN 'Services offered in your area'
+                 WHEN NUMBER_10 = 9 THEN 'Vacation rentals at great rates'
+                 ELSE 'General listing'
+               END
+    ) AS parameters,
+    -- Enabled/Disabled based on BOOLEAN_87
+    CASE
+      WHEN BOOLEAN_87 THEN 'enabled'
+      ELSE 'disabled'
+    END AS status,
+    -- Listing price column
+    19.95 + (NUMBER_10 % 36) AS listing_price, -- Random value between 19.95 and 54.95
+    -- Expires at column
+    CASE
+      WHEN NUMBER_7 % 3 = 0 THEN DATEADD(DAY, 3, CURRENT_TIMESTAMP()) -- 3 days
+      WHEN NUMBER_7 % 3 = 1 THEN DATEADD(DAY, 7, CURRENT_TIMESTAMP()) -- 7 days
+      WHEN NUMBER_7 % 3 = 2 THEN DATEADD(DAY, 31, CURRENT_TIMESTAMP()) -- 31 days
+    END AS expires_at
+  FROM
+    PUBLIC.EVENTS;
