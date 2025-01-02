@@ -1,0 +1,11 @@
+name: Created ad listing
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    USER_ID,
+    DATEADD(DAY, -NUMBER_7, CURRENT_TIMESTAMP()) AS LISTED_AT,
+    USER_ID AS AD_ID,
+  FROM
+    PUBLIC.EVENTS;
+eventTimestampColumn: LISTED_AT

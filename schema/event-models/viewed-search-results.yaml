@@ -1,0 +1,11 @@
+name: Viewed search results
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    USER_ID,
+    DATEADD(DAY, -NUMBER_7, CURRENT_TIMESTAMP()) AS VIEWED_AT,
+    USER_ID AS SEARCH_ID,
+  FROM
+    PUBLIC.EVENTS;
+eventTimestampColumn: VIEWED_AT
