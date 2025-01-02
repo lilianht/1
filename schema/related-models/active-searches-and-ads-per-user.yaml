@@ -1,0 +1,12 @@
+name: Active Searches & Ads per User
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    USER_ID,
+    -- Generate a count for saved searches based on NUMBER_100
+    NUMBER_100 % 11 AS count_saved_searches, -- Produces values between 0 and 10
+    -- Generate a count for ad listings based on NUMBER_10
+    NUMBER_10 % 16 AS count_ad_listings -- Produces values between 0 and 15
+  FROM
+    Public.users;
