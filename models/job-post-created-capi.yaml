@@ -1,0 +1,27 @@
+name: job_post_created CAPI
+source: marketplace
+type: raw_sql
+rawSql: |
+  SELECT
+    e.user_id,
+    u.email,
+    e.event_id,
+    DATEADD(DAY, - e.number_365, CURRENT_TIMESTAMP()) AS timestamp,
+    CASE
+      WHEN e.number_7 = 0 THEN 'draft_first_job_post_created'
+      WHEN e.number_7 = 1 THEN 'draft_nfjp_created'
+      WHEN e.number_7 = 2 THEN 'draft_nfjp_created'
+      WHEN e.number_7 = 3 THEN 'draft_first_job_post_created'
+      WHEN e.number_7 = 4 THEN 'first_job_post_created'
+      WHEN e.number_7 = 5 THEN 'first_job_post_created'
+      WHEN e.number_7 = 6 THEN 'nfjp_created'
+      WHEN e.number_7 = 7 THEN 'nfjp_created'
+      ELSE NULL
+    END AS event_name
+  FROM
+    PUBLIC.events e
+  LEFT JOIN
+    PUBLIC.users u
+  ON
+    e.user_id = u.user_id;
+primaryKey: EVENT_ID
