@@ -1,4 +1,4 @@
-name: Download mobile app
+name: Viewed ad listing
 source: marketplace
 type: raw_sql
 rawSql: |
