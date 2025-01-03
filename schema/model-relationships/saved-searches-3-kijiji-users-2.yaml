@@ -1,0 +1,11 @@
+from:
+  relationshipName: Kijiji Users
+  slug: saved-searches-3
+  mergeColumns: true
+to:
+  slug: kijiji-users-2
+  mergeColumns: false
+cardinality: many:1
+mapping:
+  - fromColumn: USER_ID
+    toColumn: USER_ID
