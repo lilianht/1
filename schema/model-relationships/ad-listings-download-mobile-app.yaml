@@ -1,0 +1,11 @@
+from:
+  relationshipName: Viewed ad listing
+  slug: ad-listings
+  mergeColumns: false
+to:
+  slug: download-mobile-app
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: AD_ID
+    toColumn: EVENT_ID
