@@ -4,50 +4,45 @@ type: raw_sql
 rawSql: |
   SELECT
     ROW_NUMBER() OVER (
-      ORDER BY
-        RANDOM()
+      ORDER BY RANDOM()
     ) AS PRIMARY_KEY,
     ROW_NUMBER() OVER (
-      ORDER BY
-        RANDOM()
+      ORDER BY RANDOM()
     ) || '-' || EMAIL AS EMAIL,
-    user_id,
-    first_name,
-    last_name,
+    USER_ID,
+    FIRST_NAME,
+    LAST_NAME,
     CASE
-      WHEN CAST(RANDOM() * 10 AS INT) = 0 THEN 'Ontario'
-      WHEN CAST(RANDOM() * 10 AS INT) = 1 THEN 'Quebec'
-      WHEN CAST(RANDOM() * 10 AS INT) = 2 THEN 'British Columbia'
-      WHEN CAST(RANDOM() * 10 AS INT) = 3 THEN 'Alberta'
-      WHEN CAST(RANDOM() * 10 AS INT) = 4 THEN 'Manitoba'
-      WHEN CAST(RANDOM() * 10 AS INT) = 5 THEN 'Saskatchewan'
-      WHEN CAST(RANDOM() * 10 AS INT) = 6 THEN 'Nova Scotia'
-      WHEN CAST(RANDOM() * 10 AS INT) = 7 THEN 'New Brunswick'
-      WHEN CAST(RANDOM() * 10 AS INT) = 8 THEN 'Prince Edward Island'
-      WHEN CAST(RANDOM() * 10 AS INT) = 9 THEN 'Newfoundland and Labrador'
+      WHEN NUMBER_10 % 10 = 0 THEN 'Ontario'
+      WHEN NUMBER_10 % 10 = 1 THEN 'Quebec'
+      WHEN NUMBER_10 % 10 = 2 THEN 'British Columbia'
+      WHEN NUMBER_10 % 10 = 3 THEN 'Alberta'
+      WHEN NUMBER_10 % 10 = 4 THEN 'Manitoba'
+      WHEN NUMBER_10 % 10 = 5 THEN 'Saskatchewan'
+      WHEN NUMBER_10 % 10 = 6 THEN 'Nova Scotia'
+      WHEN NUMBER_10 % 10 = 7 THEN 'New Brunswick'
+      WHEN NUMBER_10 % 10 = 8 THEN 'Prince Edward Island'
+      WHEN NUMBER_10 % 10 = 9 THEN 'Newfoundland and Labrador'
       ELSE 'Ontario'
     END AS PROVINCE,
-    ip_address,
-    gender,
-    boolean_52 AS subscribed,
-    boolean_87 AS loyalty_member,
+    IP_ADDRESS,
+    GENDER,
+    BOOLEAN_87 AS loyalty_member,
     CASE
-      WHEN number_10 BETWEEN 0 AND 4 THEN 'Bronze'
-      WHEN number_10 BETWEEN 5 AND 7 THEN 'Silver'
-      WHEN number_10 BETWEEN 8 AND 9 THEN 'Gold'
-      WHEN number_10 = 10 THEN 'Platinum'
+      WHEN NUMBER_10 BETWEEN 0 AND 4 THEN 'Bronze'
+      WHEN NUMBER_10 BETWEEN 5 AND 7 THEN 'Silver'
+      WHEN NUMBER_10 BETWEEN 8 AND 9 THEN 'Gold'
+      WHEN NUMBER_10 = 10 THEN 'Platinum'
       ELSE NULL
     END AS VIP_tier,
-    boolean_34 AS churned,
-    boolean_52 AS email_consent,
-    boolean_52 AS ads_consent,
-    DATEADD(DAY, - number_365, CURRENT_TIMESTAMP()) AS registered_at, -- Simplified logic
-    DATEADD(DAY, - number_7, CURRENT_TIMESTAMP()) AS last_logged_in_date,
-    DATEADD(DAY, - number_30, CURRENT_TIMESTAMP()) AS last_purchase_date,
-    number_10 AS number_support_tickets,
-    number_100 AS intent_score,
-    number_1000 AS LTV,
-    number_1000 AS rewards_balance
+    BOOLEAN_52 AS email_consent,
+    BOOLEAN_52 AS ads_consent,
+    DATEADD(DAY, -NUMBER_365, CURRENT_TIMESTAMP()) AS registered_at, -- Simplified logic
+    DATEADD(DAY, -NUMBER_7, CURRENT_TIMESTAMP()) AS last_logged_in_date,
+    DATEADD(DAY, -NUMBER_30, CURRENT_TIMESTAMP()) AS last_purchase_date,
+    NUMBER_10 AS number_support_tickets,
+    NUMBER_100 AS intent_score,
+    NUMBER_1000 AS LTV
   FROM
     PUBLIC.USERS
     CROSS JOIN (
