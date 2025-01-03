@@ -1,4 +1,4 @@
-name: Connect social account
+name: Favorited ad listing
 source: marketplace
 type: raw_sql
 rawSql: |
