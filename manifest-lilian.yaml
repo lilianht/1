@@ -2,6 +2,9 @@
 # Changes made here will be ignored. Please use the Hightouch dashboard to create and edit sources and destinations.
 
 sources:
+  snowflake-upwork-video:
+    name: Snowflake (Upwork video)
+    type: snowflake
   e-commerce:
     name: 🍏 eCommerce
     type: snowflake
