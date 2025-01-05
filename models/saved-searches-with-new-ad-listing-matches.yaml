@@ -4,6 +4,7 @@ type: raw_sql
 rawSql: |-
   SELECT
       ss.search_id,
+      ss.search_title,
       ss.user_id,
       ARRAY_AGG(
           OBJECT_CONSTRUCT(
@@ -24,5 +25,5 @@ rawSql: |-
           CAST(ss.filters:price_min AS DECIMAL) AND 
           CAST(ss.filters:price_max AS DECIMAL)
   GROUP BY
-      ss.search_id, ss.user_id;
+      ss.search_id, ss.user_id, ss.search_title;
 primaryKey: SEARCH_ID
