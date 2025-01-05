@@ -1,0 +1,23 @@
+model: saved-searches-with-new-ad-listing-matches
+destination: earl-s-iterable-project-tejas-hightouch-io-hightouch-email-project-b7829
+config:
+  type: trigger
+  userId:
+    from: USER_ID
+  mappings:
+    - to: SEARCH_ID
+      from: SEARCH_ID
+      type: standard
+    - to: SEARCH_TITLE
+      from: SEARCH_TITLE
+      type: standard
+    - to: MATCHING_AD_LISTINGS
+      from: MATCHING_ADS
+      type: standard
+  rateLimit: {}
+  campaignId: '11682763'
+  configVersion: 3
+  externalIdMapping: {}
+schedule:
+  type: manual
+schedulePaused: false
