@@ -1,0 +1,28 @@
+name: Saved Searches with new Ad Listing Matches
+source: b2-b-accounts
+type: raw_sql
+rawSql: |-
+  SELECT
+      ss.search_id,
+      ss.user_id,
+      ARRAY_AGG(
+          OBJECT_CONSTRUCT(
+              'ad_id', al.ad_id,
+              'listing_title', al.listing_title,
+              'listing_url', al.listing_url,
+              'details', al.details
+          )
+      ) AS matching_ads
+  FROM
+      saved_searches ss
+  INNER JOIN
+      ad_listings al
+  ON
+      ss.filters:category = al.details:category
+      AND ss.filters:location = al.details:location
+      AND CAST(al.details:asking_price AS DECIMAL) BETWEEN 
+          CAST(ss.filters:price_min AS DECIMAL) AND 
+          CAST(ss.filters:price_max AS DECIMAL)
+  GROUP BY
+      ss.search_id, ss.user_id;
+primaryKey: SEARCH_ID
