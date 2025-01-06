@@ -1,0 +1,7 @@
+name: Ad Posters
+source: marketplace
+type: raw_sql
+rawSql: select * from public.users;
+primaryKey: USER_ID
+primaryLabel: FIRST_NAME
+secondaryLabel: EMAIL
