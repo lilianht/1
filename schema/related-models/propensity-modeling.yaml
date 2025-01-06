@@ -1,0 +1,24 @@
+name: Propensity modeling
+source: marketplace
+description: Next best step and winback propensity model
+type: raw_sql
+rawSql: |-
+  SELECT
+    user_id,
+    DATEADD(DAY, - number_7, CURRENT_TIMESTAMP()) AS Scores_calculated_at,
+    -- DATEADD(DAY, - number_365, CURRENT_TIMESTAMP()) AS timestamp,
+    -- DATEADD(DAY, - number_30, CURRENT_TIMESTAMP()) AS timestamp,
+    number_100 as winback_propensity,
+    CASE
+      WHEN number_7 = 0 THEN 'Send user education campaign'
+      WHEN number_7 = 1 THEN 'Send user education campaign'
+      WHEN number_7 = 2 THEN 'Send user education campaign'
+      WHEN number_7 = 3 THEN 'Nurture'
+      WHEN number_7 = 4 THEN 'Nurture'
+      WHEN number_7 = 5 THEN 'Nurture'
+      WHEN number_7 = 6 THEN 'Nurture'
+      WHEN number_7 = 7 THEN 'Do not contact'
+      ELSE NULL
+    END AS NEXT_STEP_RECOMMENDED,
+  FROM
+    PUBLIC.events
