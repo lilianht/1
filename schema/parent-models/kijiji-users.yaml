@@ -1,5 +1,6 @@
 name: Kijiji Users
 source: marketplace
+description: All Kijiji users for one parent model
 type: raw_sql
 rawSql: |
   SELECT
