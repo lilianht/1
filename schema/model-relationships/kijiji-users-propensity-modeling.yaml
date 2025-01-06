@@ -1,0 +1,11 @@
+from:
+  relationshipName: Propensity modeling
+  slug: kijiji-users
+  mergeColumns: true
+to:
+  slug: propensity-modeling
+  mergeColumns: false
+cardinality: '1:1'
+mapping:
+  - fromColumn: USER_ID
+    toColumn: USER_ID
