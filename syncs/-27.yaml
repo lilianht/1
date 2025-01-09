@@ -1,0 +1,41 @@
+model: user-attributes-to-live-on-braze-profiles
+destination: undefined-885f0-10f16
+config:
+  mode: upsert
+  type: object
+  object: user
+  mappings:
+    - to: country
+      from: ACCOUNT_ID
+      type: standard
+    - to: email
+      from: EMAIL
+      type: standard
+    - to: first_name
+      from: FIRST_NAME
+      type: standard
+    - to: gender
+      from: GENDER
+      type: standard
+    - to: language
+      from: LAST_NAME
+      type: standard
+    - to: last_name
+      from: LAST_NAME
+      type: standard
+  deleteMode: clear
+  rowsPerBatch: 75
+  aliasMappings: []
+  configVersion: 3
+  customMappings:
+    - to: propensity_to_churn
+      from: NUMBER_10
+      type: standard
+  parallelization: 65
+  externalIdMapping:
+    to: external_id
+    from: USER_ID
+    type: standard
+schedule:
+  type: manual
+schedulePaused: false
