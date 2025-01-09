@@ -1,0 +1,22 @@
+model: saved-searches-with-new-ad-listing-matches
+destination: undefined-885f0-10f16
+config:
+  mode: upsert
+  type: object
+  object: user
+  mappings: []
+  rowsPerBatch: 75
+  aliasMappings: []
+  configVersion: 3
+  customMappings:
+    - to: MATCHING_ADS
+      from: MATCHING_ADS
+      type: standard
+  parallelization: 65
+  externalIdMapping:
+    to: external_id
+    from: USER_ID
+    type: standard
+schedule:
+  type: manual
+schedulePaused: false
