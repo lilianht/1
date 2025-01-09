@@ -5,6 +5,7 @@ config:
   type: object
   object: user
   mappings: []
+  deleteMode: clear
   rowsPerBatch: 75
   aliasMappings: []
   configVersion: 3
