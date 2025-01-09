@@ -1,0 +1,5 @@
+name: User attributes to live on Braze profiles
+source: snowflake-upwork-video
+type: raw_sql
+rawSql: select * from public.users;
+primaryKey: USER_ID
